@@ -39,7 +39,7 @@ contract InteractionsTest is Test {
     }
 
     function testCreateSubscriptionReturnsSubId() public {
-        (uint256 subId, ) = createSubscription.createSubscriptionUsingConfig();
+        (uint256 subId,) = createSubscription.createSubscriptionUsingConfig();
         assert(subId > 0);
     }
 
