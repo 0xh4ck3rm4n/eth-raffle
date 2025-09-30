@@ -32,6 +32,12 @@ jobs:
         run: forge build --sizes
         id: build
 
+      - name: Run Forge build
+        run: |
+          # Only check main contracts for size
+          forge build --sizes --contracts "src/*.sol"
+        id: build
+
       - name: Run Forge tests
         run: forge test -vvv
         id: test
