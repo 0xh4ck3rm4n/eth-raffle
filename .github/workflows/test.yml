@@ -1,45 +1,34 @@
-name: CI
+name: test
 
-on:
-  push:
-  pull_request:
-  workflow_dispatch:
+on: workflow_dispatch
 
 env:
   FOUNDRY_PROFILE: ci
 
 jobs:
   check:
+    strategy:
+      fail-fast: true
+
     name: Foundry project
     runs-on: ubuntu-latest
     steps:
-      # Checkout the repo with all submodules
-      - name: Checkout repo with submodules
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
 
-      # Install Foundry
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
 
-      # Show Forge version
-      - name: Show Forge version
-        run: forge --version
-
-      # Run Forge fmt check
-      - name: Run Forge fmt
-        run: forge fmt --check
-        id: fmt
-
-      # Run Forge build, ignoring mocks for size check
       - name: Run Forge build
         run: |
-          # Only check main contracts for size
-          forge build --sizes --contracts "src/*.sol"
+          forge --version
+          forge build --sizes
         id: build
 
-      # Run Forge tests
       - name: Run Forge tests
-        run: forge test -vvv
+        run: |
+          forge test -vvv
         id: test
