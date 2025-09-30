@@ -14,11 +14,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
     error Raffle__InsufficientEntranceFee();
     error Raffle__TransferToWinnerFailed();
     error Raffle__RaffleIsNotOpen();
-    error Raffle__UpKeepNotNeeded(
-        uint256 balance,
-        uint256 playersLength,
-        uint256 raffleState
-    );
+    error Raffle__UpKeepNotNeeded(uint256 balance, uint256 playersLength, uint256 raffleState);
 
     /** Type Declaration */
     enum RaffleState {
