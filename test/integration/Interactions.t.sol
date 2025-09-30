@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {Test} from "forge-std/test.sol";
+import {Test} from "forge-std/Test.sol";
 import {CreateSubscription, FundSubscription} from "../../script/Interactions.s.sol";
 import {HelperConfig} from "../../script/HelperConfig.s.sol";
 import {DeployRaffle} from "../../script/DeployRaffle.s.sol";
@@ -39,7 +39,7 @@ contract InteractionsTest is Test {
     }
 
     function testCreateSubscriptionReturnsSubId() public {
-        (uint256 subId,) = createSubscription.createSubscriptionUsingConfig();
+        (uint256 subId, ) = createSubscription.createSubscriptionUsingConfig();
         assert(subId > 0);
     }
 
