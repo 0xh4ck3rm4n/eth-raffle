@@ -13,31 +13,33 @@ jobs:
     name: Foundry project
     runs-on: ubuntu-latest
     steps:
+      # Checkout the repo with all submodules
       - name: Checkout repo with submodules
         uses: actions/checkout@v4
         with:
           submodules: recursive
 
+      # Install Foundry
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
 
+      # Show Forge version
       - name: Show Forge version
         run: forge --version
 
+      # Run Forge fmt check
       - name: Run Forge fmt
         run: forge fmt --check
         id: fmt
 
-      - name: Run Forge build
-        run: forge build --sizes
-        id: build
-
+      # Run Forge build, ignoring mocks for size check
       - name: Run Forge build
         run: |
           # Only check main contracts for size
           forge build --sizes --contracts "src/*.sol"
         id: build
 
+      # Run Forge tests
       - name: Run Forge tests
         run: forge test -vvv
         id: test
